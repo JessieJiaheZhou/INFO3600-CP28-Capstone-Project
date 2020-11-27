@@ -1,0 +1,45 @@
+/** Styling the wrapping container for meeting thumbnails (avatar name, background) **/
+.meetingAvatarWrap {
+    align-content: center;
+    float: right;
+    height: 100%;
+    margin: 0;
+    vertical-align: middle;
+    width: 78%;
+}
+
+
+/** Styling each of the individual avatar container **/
+.participant-avatar {
+    display: inline-block;
+    height: 100%;
+    margin: 1% 3px;
+    vertical-align: middle;
+    width: 16%;
+}
+
+
+/** Styling the general properties of avatar background each of the individual avatar container **/
+.avatar-background {
+    border-radius: 50%;
+    height: 6vh;
+    margin: auto;
+    transform: translate(0, 5%);
+    vertical-align: middle;
+    width: 5vw;
+}
+
+
+/** Styling the text for participants' name show on avatar **/
+.displayName-text {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.2vmin;
+    font-weight: 100%;
+    height: 100%;
+    margin: auto;
+    text-align: center;
+    transform: translate(0, 42%);
+    vertical-align: middle;
+    word-break: break-word;
+    width: 100%;
+}

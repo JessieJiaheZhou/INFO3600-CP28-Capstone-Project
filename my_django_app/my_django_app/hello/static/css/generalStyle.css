@@ -1,0 +1,93 @@
+/** Styling of head nav bar **/
+html,
+body {
+    background-color: black;
+    font-family: Arial;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* styling the leave conference button */
+#leave-conference {
+    background-color: #b11226;
+    border-width: 0;
+    color: rgb(184, 199, 224);
+    cursor: pointer;
+    display: block;
+    font-size: 2vmin;
+    height: fit-content;
+    min-height: 5vmin;
+    min-width: 8vw;
+    position: fixed;
+    right: 45vw;
+    top: 5px;
+    width: fit-content;
+}
+
+ ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    border-radius: 20px;
+    color: grey;
+    font-size: 70%;
+}
+
+/* styling the head navigation bar before the user has provided a display name */
+#navbar-prejoin {
+    background-color: black;
+    color: rgb(184, 199, 224);
+    position: fixed;
+    display: none; 
+    width: 100%;
+    height: 6%;
+    margin: 0%;
+    z-index: 1;
+    top: 0%;
+    overflow: hidden;
+    padding: 0;
+
+}
+/* styling the head navigation bar for once the user has entered their display name
+* and hence joined the conference
+*/
+#navbar-postjoin {
+    background-color: #b11226;
+    color: rgb(184, 199, 224);
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 6%;
+    margin: 0%;
+    z-index: 1;
+    top: 0%;
+    overflow: hidden;
+    padding: 0;
+   
+}
+
+
+/** Styling of meeting page body container **/
+body-container {
+    background-color: black;
+    display: block;
+    height: 85%;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 1%;
+    position: fixed;
+    top: 10%;
+    width: 100%;
+}
+
+
+/** Styling the text of concurrent meeting names **/
+.onscreen-name {
+    display: block;
+    font-size: 1.1vh;
+    height: 2vh;
+    overflow: hidden;
+    margin: 1vh 1vw;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+}

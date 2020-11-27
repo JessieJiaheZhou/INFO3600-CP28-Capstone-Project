@@ -1,0 +1,131 @@
+
+/** Styling of components in left-side container **/
+.meeting-content-container {
+    background-color: black;
+    display: inline-block;
+    height: 100%;
+    position: relative;
+    vertical-align: top;
+    width: 55%;
+}
+
+p {
+    display: block;
+}
+
+
+/** Styling of list of active meetings on meeting page (RHS wrapping container) **/
+.active-meeting-list {
+    align-content: center;
+    background-color: black;
+    display: inline-block;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    vertical-align: top;
+    width: 43%;
+}
+
+
+/** Styling of the meeting list **/
+.meeting-list-wrap {
+    background-color: transparent;
+    color: black;
+    height: 100%;
+    margin: 0;
+    margin-left: 0%;
+    overflow: hidden;
+    width: 100%;
+}
+
+
+/** Styling each of the individual meeting's preview wrapping container **/
+.idv-concurrent {
+    background-color: transparent;
+    border-style: solid;
+    border-width: 0;
+    color: rgb(184, 199, 224);
+    display: block;
+    font-weight: bold;
+    height: 10%;
+    margin: 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+
+/** Styling the wrapping container for meeting info (meeting title, switch/leace buttons) **/
+.meetingInfoWrap {
+    background-color: transparent;
+    display: inline-block;
+    height: 100%;
+    margin: 0;
+    vertical-align: middle;
+    width: 21%;
+}
+
+
+/** Styling for container holding buttons to switch and leave active meetings **/
+.session-btn-container {
+    background-color: transparent;
+    display: block;
+    height: 100%;
+    margin-top: 5%;
+    width: 100%;
+}
+
+
+/** Styling the thumbnail button to switch to a concurrent meeting **/
+.join-btn {
+    background-color: rgba(34, 34, 34, 0.7);
+    border-color: transparent;
+    border-radius: 3px;
+    color: rgb(184, 199, 224);
+    display: block;
+    font-size: 1vh;
+    height: 2.4vh;
+    margin: -5px auto 1px auto;
+    outline: none;
+    padding: 0;
+    width: 95%;
+}
+
+/* Styling for when hovering over the join meeting button */
+.join-btn:hover {
+    background-color: rgb(184, 199, 224);
+    border: none;
+    color: black;
+    cursor: pointer;
+    outline: none;
+}
+
+
+/** Styling the thumbnail button to leave a concurrent meeting **/
+.leave-btn {
+    background-color: rgba(34, 34, 34, 0.7);
+    border-color: transparent;
+    border-radius: 3px;
+    color: rgb(184, 199, 224);
+    display: block;
+    font-size: 1vh;
+    height: 2.4vh;
+    margin: auto;
+    outline: none;
+    padding: 0;
+    width: 95%;
+}
+
+/* styling for when hovering over leave meeting button */
+.leave-btn:hover {
+    background-color: rgb(184, 199, 224);
+    border: none;
+    color: black;
+    cursor: pointer;
+    outline: none;
+}
+
+/** styling of POST form **/
+.form-container {
+    background-color: transparent;
+    margin: 0;
+}

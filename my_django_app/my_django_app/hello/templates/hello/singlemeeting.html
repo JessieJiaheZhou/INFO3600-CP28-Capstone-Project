@@ -1,0 +1,143 @@
+{% load static %} {%block content%}
+<html itemscope itemtype="http://schema.org/Product" prefix="og: http://ogp.me/ns#" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <title>INFO3600 Group 2 Web Conference Project</title>
+    <link rel="stylesheet" type="text/css" href="{%static 'css/generalStyle.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/nameFormStyle.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/meetingListStyle.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/avatars.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://stage2.info3600cp28.net/libs/external_api.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script type="text/javascript" src="{%static 'js/initialisePlatformInformation.js'%}"></script>
+    <!-- hidden components to pass data from html to functions.js -->
+    <p id="meetingList" style="display:none"></p>
+    <p id="ruuningMeeting" style="display:none"></p>
+</head>
+<body>
+   <head-nav-bar id="navbar-prejoin">
+        <p id='project-name'style="padding-left:15px;font-size:2vmin;overflow: hidden;font-family:Arial;color:rgb(184, 199, 224)">INFO3600 Group2 Web Conference</p>
+    </head-nav-bar>
+    <head-nav-bar id="navbar-postjoin">
+        <!-- Form to receive user's request to leave the conference platform -->
+        <form id = "leave-conference" name = "leave-conference"  action="" method="POST">
+            {% csrf_token %}
+            <input id = "meetingPID" type = "hidden" name = "meetingPID" value = default />
+            <input type="submit" id="leave-conference" name="leave-conference" onclick="return leaveConference()" value="Leave Conference">
+        </form>
+    </head-nav-bar>
+    <body-container>
+         <!-- Form that ask displayName from user upon opening up the webpage for the first time -->
+        <div id="displayNameForm">
+            <form class="meeting-info-form" id = "display-name-form" name = "display-name-form"  action="" method="POST">
+             {% csrf_token %}
+                <div class="form-group">
+                    <p style="color: rgb(184, 199, 224); text-align: center; position: relative; top: 25%; font-family: Arial; font-size: 2vmin;">
+                        Please Type in Your Name</p>
+                    <input type="text" name="userAlias" position: relative; id="userAlias" value="" style="width: 100%; height: 5vh; " maxLength="200" placeholder="Enter Your User Name..." class="form-control" />
+                </div>
+                <br><br><br><button class="display-name-form-button" id="display-name-form" name="display-name-form" value="Join" onclick="saveNewName();return false">Enter</button>
+            </form>
+        </div>
+        <!-- Meeting container containing video conference itself -->
+            <div class="meeting-content-container" id="conferenceMeeting">
+                <script type="text/javascript" src="{%static 'js/webConference.js'%}"></script>
+            </div>
+        <!--List of active meetings and the buttons to switch to them -->
+        <div class="active-meeting-list" id="meeting_list">
+            <div class="meeting-list-wrap" id="concurrent-wrap"></div>
+        </div>
+    </body-container>
+    <script>
+        /** 
+        * Variable to relay the data retrieved from SQL database
+        */
+        var myData = {{data | safe}};
+    </script>
+    <script type="text/javascript" src="{%static 'js/updateActiveMeetings.js'%}"></script>
+    <script type="text/javascript" src="{%static 'js/enterPlatform.js'%}"></script>
+    <script type="text/javascript" src="{%static 'js/leavePlatform.js'%}"></script>
+    <script type="text/javascript" src="{%static 'js/switchMeetings.js'%}"></script>
+    <script type="text/javascript" src="{%static 'js/updateThumbnails.js'%}"></script>
+    <script type="text/javascript" src="{%static 'js/updateAvatars.js'%}"></script>
+    <script type="text/javascript" src="{%static 'js/leaveMeeting.js'%}"></script>
+    <script type="text/javascript" src="{%static 'js/participants.js'%}"></script>
+   
+    <script id="thumbnail_functions">
+    /** 
+    * Function to insert thumbnails of all the concurrent meetings
+    * creates affliated components including meeting name, switching and leaving button, and a wrapping container for individual avatars
+    * if matched, obtain the corresponding participants' information whom in the meeting and display in the innerHTML element
+    * store into local arrays
+    */
+        function insertMeetingThumb() {
+            var standbyMeetings = localStorage.getItem("standbyMeetings");
+            standbyMeetings = JSON.parse(standbyMeetings);
+
+            for (i=0;i<standbyMeetings.length;i++) {
+                const meeting = document.createElement('div');
+                meeting.className = 'idv-concurrent';
+                meeting.id = standbyMeetings[i].replaceAll(" ", "");
+                var tmpRoomName = standbyMeetings[i];
+                var tmpRoomNameId = "roomThumb-" + i;
+                var tmpJoinBtnId = "join-room-" + i;
+                var tmpLeaveBtnId = "leave-room-" + i;
+                var tmpAvatarWrapId = "avatar-wrap--" + tmpRoomName.replaceAll(" ", "_");
+                var tmpMeetingName = "meetingName" + i;
+                var tmpMeetingPID = "meetingPID" +i;
+                var tmpDisplayName = "displayName"+i;
+                meeting.innerHTML=`
+                <div class="meetingInfoWrap">
+                    <p class="onscreen-name" id=${tmpRoomNameId}>${tmpRoomName}</p>
+                    <div class="session-btn-container">
+                        <form name = ${tmpJoinBtnId} id = ${tmpJoinBtnId} action="" method="POST">
+                            {% csrf_token %}
+                            <input id = ${tmpMeetingName} type = "hidden" name = ${tmpMeetingName} value = ${tmpRoomName} />
+                            <input id = ${tmpMeetingPID} type = "hidden" name = ${tmpMeetingPID} value = "OTHER" />
+                            <input id = ${tmpDisplayName} type = "hidden" name = ${tmpDisplayName} value = "default" />
+                            <input type="submit" class="join-btn" id=${tmpJoinBtnId} name=${tmpJoinBtnId} onclick="return renewAPI(this.id, myData)" value="Join Meeting">
+                            <input type="button" class="leave-btn" id=${tmpLeaveBtnId} onclick="return leaveMeeting(this.id, myData)" value="Leave Meeting">
+                        </form> 
+                    </div>
+                </div>
+                <div class="meetingAvatarWrap" id=${tmpAvatarWrapId}></div>`;
+                let wrapContainer = document.getElementById('concurrent-wrap');
+                    wrapContainer.append(meeting);
+                }
+            return;
+            }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{%static 'js/createLayout.js'%}"></script>
+    <script id="data_communication_function">
+    /**
+    * Function to send POST request to the test function of "getAllMeetingParticipants" on views.py
+    *  in order to display thumbnails
+    */
+        function getThumbnailData(){
+            $.ajax({
+                url: "{% url 'my_ajax_request' %}",
+                dataType: 'json',
+                type: 'POST',
+                success: function(data) {
+                    if (data.is_valid) {
+                       myData = data.response;
+                    } 
+                }
+            });            
+        }
+        window.onload =  setInterval(function() {
+            updateThmbnails(myData);
+        }, 1000);
+        window.onload = getRunningMeeting();
+        window.onload = getParticipants(myData);
+        window.onload = insertMeetingThumb();
+        window.onload = insertAvatars();
+        window.onload = insert(); 
+    </script>
+    <script>
+    </script>
+</body>
+</html>
+{% endblock %}

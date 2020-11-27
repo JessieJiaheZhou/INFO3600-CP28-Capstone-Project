@@ -1,0 +1,102 @@
+
+/** Styling the form that shows up when open up the webpage upon the first time **/
+#displayNameForm {
+    background-color: rgba(27, 38, 56, 0.7);
+    border-radius: 2px;
+    display: none;
+    height: 19vh;
+    left: 32%;
+    opacity: 100%;
+    padding: 2%;
+    position: fixed;
+    top: 40%;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    width: 30vw;
+}
+
+.form-group {
+    margin: auto;
+}
+
+/* styling for display name form button */
+.display-name-form-button {
+    align-items: center;
+    background-color: black;
+    border: none;
+    bottom: 50px;
+    color: rgb(184, 199, 224);
+    cursor: pointer;
+    display: -ms-inline-flexbox;
+    float: left;
+    font-family: Arial;
+    font-size: 2vh;
+    font-weight: bold;
+    height: 5vh;
+    justify-content: center;
+    margin-left: 35%;
+    position: relative;
+    width: 8vw;
+}
+
+/* styling for when participant hovers cursor over display name form  button */
+.display-name-form-button:hover {
+    background-color: rgb(184, 199, 224);
+    color: black;
+}
+
+/* styling for input text */
+input[type=text] {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border: 2px solid rgb(184, 199, 224);
+    border-radius: 2px;
+    color: black;
+    font-family: Arial;
+    font-size: 2vh;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+}
+
+/* styling for input text */
+input[type=text]:focus {
+    border: 3px solid rgb(184, 199, 224);
+    color: black;
+    font-family: Arial;
+    font-size: 2vh;
+    outline: none;
+}
+
+
+/** Style the button used to take you to the conference hall **/
+button {
+    background-color: black;
+    border-color: rgb(184, 199, 224);
+    border-radius: 2px;
+    border-style: none;
+    border-width: 1px;
+    box-shadow: none;
+    color: rgb(184, 199, 224);
+    display: block;
+    float: right;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 78%;
+    opacity: 70%;
+    overflow: hidden;
+    margin: 1% 0%;
+    text-decoration: none;
+    word-wrap: normal;
+}
+
+input {
+    height: 7%;
+    width: 80%;
+}
+
+form {
+    height: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
